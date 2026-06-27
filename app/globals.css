@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-inter: 'Poppins', sans-serif;
+  --font-playfair: 'Poppins', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-inter);
+  color: #1a1a1a;
+  background-color: #ffffff;
+}
+
+/* Swiper pre-init guard: keep slides in a single horizontal row (only the
+   first visible) before Swiper's own CSS/JS finishes initializing, so they
+   never flash stacked one below the other on reload. */
+.swiper {
+  overflow: hidden;
+}
+.swiper-wrapper {
+  display: flex;
+}
+.swiper-slide {
+  flex-shrink: 0;
+  width: 100%;
+}
+
+/* Swiper custom styles */
+.swiper-pagination-bullet {
+  background: #b8975a !important;
+}
+
+/* Circular dark nav buttons with thin white arrows */
+.swiper-button-next,
+.swiper-button-prev {
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 50%;
+  background-color: #1a1a1a;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 20px 20px;
+  opacity: 0.85;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.swiper-button-prev {
+  background-image: url('/images/arrow-left.svg');
+}
+
+.swiper-button-next {
+  background-image: url('/images/arrow-right.svg');
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  opacity: 1;
+  transform: scale(1.06);
+}
+
+/* Hide Swiper's injected default navigation icon. Swiper 11+ injects a real
+   <svg class="swiper-navigation-icon"> (blue, fill: currentColor) into the
+   button — not an ::after glyph — so we hide it and use our own arrow. */
+.swiper-button-next svg,
+.swiper-button-prev svg {
+  display: none;
+}
+
+/* Category card scroll-reveal animation */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.reveal-up.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
