@@ -10,7 +10,7 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-gray-100">
-      <div className="relative w-full px-6 lg:px-10 flex items-center justify-between h-20">
+      <div className="relative w-full px-4 sm:px-6 lg:px-10 flex items-center justify-between h-20 md:h-24">
 
         {/* Left: Shop Products + Search */}
         <div className="flex items-center gap-6 lg:gap-8">
@@ -62,17 +62,11 @@ export default function Navbar() {
 
         {/* Center: Logo */}
         <Link href="/" className="absolute left-1/2 -translate-x-1/2 flex-shrink-0">
-          <img src="/images/logo.png" alt="1Roof" className="h-12 md:h-14 w-auto object-contain" />
+          <img src="/images/logo.png" alt="1 Roof" className="h-16 md:h-20 w-auto object-contain" />
         </Link>
 
-        {/* Right: Find Store + Contact Us */}
+        {/* Right: Contact Us */}
         <div className="flex items-center gap-6 lg:gap-8">
-          <Link
-            href="/store-locator"
-            className="hidden md:inline text-xs lg:text-sm font-semibold tracking-widest uppercase text-primary hover:text-accent transition-colors"
-          >
-            Find Store
-          </Link>
           <Link
             href="/contact"
             className="hidden md:inline text-xs lg:text-sm font-semibold tracking-widest uppercase text-primary hover:text-accent transition-colors"
@@ -96,9 +90,6 @@ export default function Navbar() {
               {cat.name}
             </Link>
           ))}
-          <Link href="/store-locator" className="block text-sm font-medium text-primary py-2 border-b border-gray-50 hover:text-accent transition-colors" onClick={() => setMobileOpen(false)}>
-            Find Store
-          </Link>
           <Link href="/contact" className="block text-sm font-medium text-primary py-2 hover:text-accent transition-colors" onClick={() => setMobileOpen(false)}>
             Contact Us
           </Link>

@@ -27,8 +27,10 @@ export default function Categories() {
   return (
     <section ref={sectionRef} className="py-16 px-6 md:px-10 max-w-[1400px] mx-auto">
       <div className="text-center mb-12">
-        <p className="text-xs text-accent tracking-[0.3em] uppercase mb-3">Explore Our Range</p>
-        <h2 className="text-3xl md:text-4xl font-semibold text-primary">Shop By Category</h2>
+        <h2 className="font-display italic text-accent text-4xl md:text-5xl lg:text-6xl leading-tight mb-3">
+          Explore Our Range
+        </h2>
+        <p className="text-xs md:text-sm text-primary tracking-[0.3em] uppercase">Shop By Category</p>
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5 md:gap-6">
