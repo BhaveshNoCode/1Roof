@@ -1,29 +1,30 @@
 import Link from 'next/link'
 
+// Central WhatsApp contact — used by both the social link and the floating button
+const WHATSAPP_URL = 'https://wa.me/919052583002'
+
 const footerLinks = {
   SHOP: [
-    { label: 'Living', href: '/collections/living' },
+    { label: 'Sofas', href: '/collections/sofa' },
+    { label: 'Recliners', href: '/collections/recliners' },
+    { label: 'Beds', href: '/collections/beds' },
     { label: 'Dining', href: '/collections/dining' },
-    { label: 'Bedroom', href: '/collections/beds' },
+    { label: 'Tables', href: '/collections/center-table' },
+    { label: 'Chairs', href: '/collections/accent-chair' },
   ],
   ABOUT: [
     { label: 'About Us', href: '/about' },
     { label: 'Boncare', href: '/boncare' },
-    { label: 'Honest Price', href: '/honest-pricing' },
     { label: 'Contact Us', href: '/contact' },
     { label: 'Career', href: '/careers' },
     { label: 'Blogs', href: '/blogs' },
   ],
   POLICIES: [
     { label: 'Privacy Policy', href: '/privacy-policy' },
-    { label: 'Online Payment', href: '/online-payment' },
-    { label: '1Roof Policies', href: '/policies' },
+    { label: '1 Roof Policies', href: '/policies' },
   ],
-  STORES: [
-    { label: 'Banjara Hills', href: '/stores/banjara-hills' },
-    { label: 'Kondapur', href: '/stores/kondapur' },
-    { label: 'Suncity', href: '/stores/suncity' },
-    { label: 'Ramachandrapuram', href: '/stores/ramachandrapuram' },
+  'MANUFACTURING PLANT': [
+    { label: 'Moosapet', href: '/stores/moosapet' },
     { label: 'Kompally', href: '/stores/kompally' },
   ],
 }
@@ -31,8 +32,7 @@ const footerLinks = {
 const socialLinks = [
   { label: 'Instagram', href: 'https://www.instagram.com/bontruefurniture/', icon: 'IG' },
   { label: 'Facebook', href: 'https://facebook.com/bontrue', icon: 'FB' },
-  { label: 'Pinterest', href: 'https://in.pinterest.com/BontrueFurniture', icon: 'PT' },
-  { label: 'YouTube', href: 'https://www.youtube.com/channel/UCUl5wWCcViAQDUq7s6SGW6w', icon: 'YT' },
+  { label: 'WhatsApp', href: WHATSAPP_URL, icon: 'WA' },
 ]
 
 export default function Footer() {
@@ -43,7 +43,7 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-14">
           {Object.entries(footerLinks).map(([section, links]) => (
             <div key={section}>
-              <h4 className="text-xs font-semibold tracking-widest mb-5 text-accent">{section}</h4>
+              <h4 className="text-xs font-semibold tracking-wider mb-5 text-accent break-words">{section}</h4>
               <ul className="space-y-2">
                 {links.map((link) => (
                   <li key={link.label}>
@@ -59,7 +59,7 @@ export default function Footer() {
 
         {/* Divider */}
         <div className="border-t border-gray-700 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <span className="font-serif text-xl tracking-widest">1ROOF</span>
+          <span className="font-serif text-xl tracking-widest">1 ROOF</span>
 
           {/* Socials */}
           <div className="flex items-center gap-4">
@@ -73,13 +73,13 @@ export default function Footer() {
             ))}
           </div>
 
-          <p className="text-xs text-gray-500">© 2024 1Roof Furniture. All rights reserved.</p>
+          <p className="text-xs text-gray-500">© 2026 1 Roof Furniture. All rights reserved.</p>
         </div>
       </div>
 
       {/* WhatsApp Button */}
       <Link
-        href="https://wa.link/nylp7f"
+        href={WHATSAPP_URL}
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-colors z-50"
