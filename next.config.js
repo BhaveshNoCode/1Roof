@@ -1,7 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['bontrue.in', 'cdn.shopify.com'],
+    remotePatterns: [
+      { protocol: 'https', hostname: 'bontrue.in' },
+      { protocol: 'https', hostname: 'cdn.shopify.com' },
+      { protocol: 'https', hostname: 'res.cloudinary.com' },
+    ],
   },
 }
 
