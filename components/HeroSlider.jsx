@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react'
 import Link from 'next/link'
-import { heroSlides } from '@/data'
+import { heroSlides, heroVariant } from '@/data'
 
 // Import Swiper styles statically so they are part of the initial CSS bundle
 // and present on first paint. Importing them dynamically (inside useEffect)
@@ -43,11 +43,23 @@ export default function HeroSlider() {
           {heroSlides.map((slide, i) => (
             <div key={i} className="swiper-slide">
               <Link href={slide.link}>
-                <img
-                  src={slide.image}
-                  alt={`Slide ${i + 1}`}
-                  className="block w-full h-auto object-contain"
-                />
+                <picture>
+                  {/* Mobile: taller, smart-cropped so the banner isn't squished into a thin strip */}
+                  <source
+                    media="(max-width: 640px)"
+                    srcSet={heroVariant(slide.image, 'f_auto,q_auto,c_fill,g_auto,ar_4:5,w_800')}
+                  />
+                  {/* Tablet: a shorter, still smart-cropped variant */}
+                  <source
+                    media="(max-width: 1024px)"
+                    srcSet={heroVariant(slide.image, 'f_auto,q_auto,c_fill,g_auto,ar_16:9,w_1200')}
+                  />
+                  <img
+                    src={slide.image}
+                    alt={`Slide ${i + 1}`}
+                    className="block w-full h-full object-cover aspect-[4/5] sm:aspect-video lg:aspect-auto lg:h-auto lg:object-contain"
+                  />
+                </picture>
               </Link>
             </div>
           ))}

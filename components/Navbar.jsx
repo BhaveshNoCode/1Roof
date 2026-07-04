@@ -33,7 +33,7 @@ export default function Navbar() {
             onMouseEnter={() => setShopOpen(true)}
             onMouseLeave={() => setShopOpen(false)}
           >
-            <button className="text-xs lg:text-sm font-semibold tracking-widest uppercase text-primary hover:text-accent transition-colors">
+            <button className="text-sm md:text-base font-medium text-primary hover:text-accent transition-colors">
               Shop Products
             </button>
             {shopOpen && (
@@ -56,20 +56,20 @@ export default function Navbar() {
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" />
             </svg>
-            <span className="hidden md:inline text-xs lg:text-sm font-semibold tracking-widest uppercase">Search</span>
+            <span className="hidden md:inline text-sm md:text-base font-medium">Search</span>
           </button>
         </div>
 
         {/* Center: Logo */}
         <Link href="/" className="absolute left-1/2 -translate-x-1/2 flex-shrink-0">
-          <img src="/images/logo.png" alt="1 Roof" className="h-16 md:h-20 w-auto object-contain" />
+          <img src="https://res.cloudinary.com/jqtn8ju7/image/upload/f_auto,q_auto/v1783123762/logo_pibrdr.png" alt="1 Roof" className="h-16 md:h-20 w-auto object-contain" />
         </Link>
 
         {/* Right: Contact Us */}
         <div className="flex items-center gap-6 lg:gap-8">
           <Link
             href="/contact"
-            className="hidden md:inline text-xs lg:text-sm font-semibold tracking-widest uppercase text-primary hover:text-accent transition-colors"
+            className="hidden md:inline text-sm md:text-base font-medium text-primary hover:text-accent transition-colors"
           >
             Contact Us
           </Link>

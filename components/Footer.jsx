@@ -1,33 +1,40 @@
 import Link from 'next/link'
+import { categories } from '@/data'
 
 // Central WhatsApp contact — used by both the social link and the floating button
 const WHATSAPP_URL = 'https://wa.me/919052583002'
 
-const footerLinks = {
-  SHOP: [
-    { label: 'Sofas', href: '/collections/sofa' },
-    { label: 'Recliners', href: '/collections/recliners' },
-    { label: 'Beds', href: '/collections/beds' },
-    { label: 'Dining', href: '/collections/dining' },
-    { label: 'Tables', href: '/collections/center-table' },
-    { label: 'Chairs', href: '/collections/accent-chair' },
-  ],
-  ABOUT: [
-    { label: 'About Us', href: '/about' },
-    { label: 'Boncare', href: '/boncare' },
-    { label: 'Contact Us', href: '/contact' },
-    { label: 'Career', href: '/careers' },
-    { label: 'Blogs', href: '/blogs' },
-  ],
-  POLICIES: [
-    { label: 'Privacy Policy', href: '/privacy-policy' },
-    { label: '1 Roof Policies', href: '/policies' },
-  ],
-  'MANUFACTURING PLANT': [
-    { label: 'Moosapet', href: '/stores/moosapet' },
-    { label: 'Kompally', href: '/stores/kompally' },
-  ],
-}
+const shopLinks = categories.map((c) => ({ label: c.name, href: `/collections/${c.slug}` }))
+
+// Shop is split across two columns (8 + 7) so the footer isn't one long list.
+const footerColumns = [
+  { title: 'SHOP', links: shopLinks.slice(0, 8) },
+  { title: 'SHOP', links: shopLinks.slice(8) },
+  {
+    title: 'ABOUT',
+    links: [
+      { label: 'About Us', href: '/about' },
+      { label: '1 Roof Care', href: '/1-roof-care' },
+      { label: 'Contact Us', href: '/contact' },
+      { label: 'Career', href: '/careers' },
+      { label: 'Blogs', href: '/blogs' },
+    ],
+  },
+  {
+    title: 'POLICIES',
+    links: [
+      { label: 'Privacy Policy', href: '/privacy-policy' },
+      { label: '1 Roof Policies', href: '/policies' },
+    ],
+  },
+  {
+    title: 'MANUFACTURING PLANT',
+    links: [
+      { label: 'Moosapet', href: '/stores/moosapet' },
+      { label: 'Kompally', href: '/stores/kompally' },
+    ],
+  },
+]
 
 const socialLinks = [
   { label: 'Instagram', href: 'https://www.instagram.com/bontruefurniture/', icon: 'IG' },
@@ -40,12 +47,12 @@ export default function Footer() {
     <footer className="bg-primary text-white pt-16 pb-8 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Top row */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-14">
-          {Object.entries(footerLinks).map(([section, links]) => (
-            <div key={section}>
-              <h4 className="text-xs font-semibold tracking-wider mb-5 text-accent break-words">{section}</h4>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-10 mb-14">
+          {footerColumns.map((col, i) => (
+            <div key={`${col.title}-${i}`}>
+              <h4 className="text-xs font-semibold tracking-wider mb-5 text-accent break-words">{col.title}</h4>
               <ul className="space-y-2">
-                {links.map((link) => (
+                {col.links.map((link) => (
                   <li key={link.label}>
                     <Link href={link.href} className="text-sm text-gray-400 hover:text-white transition-colors">
                       {link.label}
