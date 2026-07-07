@@ -1,4 +1,5 @@
 import './globals.css'
+import ScrollProgress from '@/components/ScrollProgress'
 
 export const metadata = {
   title: '1Roof | Premium & Luxury Furniture Store | Hyderabad',
@@ -21,8 +22,15 @@ export default function RootLayout({ children }) {
         {/* Open the connection to Cloudinary early so images start faster. */}
         <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="" />
         <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+        {/* If JS is disabled, reveal all scroll-animated content immediately. */}
+        <noscript>
+          <style>{`[data-reveal],.reveal-up{opacity:1!important;transform:none!important;filter:none!important}`}</style>
+        </noscript>
       </head>
-      <body>{children}</body>
+      <body>
+        <ScrollProgress />
+        {children}
+      </body>
     </html>
   )
 }

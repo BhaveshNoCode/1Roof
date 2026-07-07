@@ -20,9 +20,9 @@ export const categories = [
   { name: 'Bed Side Table', slug: 'bed-side-table', image: '/images/categories/bed-side-table.webp' },
   { name: 'Beds', slug: 'beds', image: `${CLOUDINARY_THUMB}/v1783136222/Image1_zxakbl.jpg` },
   { name: 'Center Table', slug: 'center-table', image: '/images/categories/center-table.webp' },
-  { name: 'Chase', slug: 'chase', image: '/images/categories/chase.webp' },
+  { name: 'Chase', slug: 'chase', image: `${CLOUDINARY_THUMB}/v1783391430/image1_asdjbd.jpg` },
   { name: 'Console Table', slug: 'console-table', image: '/images/categories/console-table.webp' },
-  { name: 'Dining', slug: 'dining', image: '/images/categories/dining.webp' },
+  { name: 'Dining Tables', slug: 'dining-tables', image: `${CLOUDINARY_THUMB}/v1783391766/image9_rchia4.jpg` },
   { name: 'Dining Chairs', slug: 'dining-chairs', image: `${CLOUDINARY_THUMB}/v1783136283/image3_oc1glw.png` },
   { name: 'Lounger Sofa', slug: 'lounger-sofa', image: `${CLOUDINARY_THUMB}/v1783136358/image1_d9smjx.jpg` },
   { name: 'Recliners', slug: 'recliners', image: '/images/categories/recliners.webp' },
@@ -38,7 +38,9 @@ export const categories = [
 export const categoryFolders = {
   'accent-chair': 'categories/accent chairs',
   beds: 'categories/beds',
+  chase: 'categories/chase',
   'dining-chairs': 'categories/dining chairs',
+  'dining-tables': 'categories/dining tables',
   'lounger-sofa': 'categories/lounger sofa',
   sofa: 'categories/sofa',
 }

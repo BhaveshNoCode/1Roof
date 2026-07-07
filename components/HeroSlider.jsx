@@ -24,7 +24,8 @@ export default function HeroSlider() {
           modules: [Navigation, Pagination, Autoplay],
           loop: true,
           autoHeight: true,
-          autoplay: { delay: 4000, disableOnInteraction: false },
+          speed: 900,
+          autoplay: { delay: 5000, disableOnInteraction: false },
           pagination: { el: '.swiper-pagination', clickable: true },
           navigation: {
             nextEl: '.swiper-button-next',
@@ -37,11 +38,11 @@ export default function HeroSlider() {
   }, [])
 
   return (
-    <section className="relative w-full overflow-hidden">
-      <div ref={swiperRef} className="swiper">
+    <section className="relative w-full overflow-hidden animate-fade-in">
+      <div ref={swiperRef} className="swiper hero-swiper">
         <div className="swiper-wrapper">
           {heroSlides.map((slide, i) => (
-            <div key={i} className="swiper-slide">
+            <div key={i} className="swiper-slide overflow-hidden">
               <Link href={slide.link}>
                 <picture>
                   {/* Mobile: taller, smart-cropped so the banner isn't squished into a thin strip */}
@@ -68,6 +69,22 @@ export default function HeroSlider() {
         <div className="swiper-button-prev" />
         <div className="swiper-button-next" />
       </div>
+
+      {/* Soft gradient vignette top & bottom for depth and to seat the controls */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/15 to-transparent z-10" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/25 to-transparent z-10" />
+
+      {/* Animated scroll cue */}
+      <a
+        href="#shop-by-category"
+        aria-label="Scroll to categories"
+        className="absolute bottom-5 left-1/2 -translate-x-1/2 z-20 hidden sm:flex flex-col items-center gap-1 text-white/80 hover:text-white transition-colors"
+      >
+        <span className="text-[10px] tracking-[0.3em] uppercase">Scroll</span>
+        <span className="flex h-9 w-6 items-start justify-center rounded-full border border-white/60 p-1">
+          <span className="h-2 w-1 rounded-full bg-accent animate-bounce" />
+        </span>
+      </a>
     </section>
   )
 }
