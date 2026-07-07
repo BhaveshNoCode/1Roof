@@ -7,6 +7,8 @@
 :root {
   --font-inter: 'Poppins', sans-serif;
   --font-playfair: 'Playfair Display', serif;
+  --accent: #b8975a;
+  --accent-light: #d9bd85;
 }
 
 * {
@@ -17,17 +19,189 @@
 
 html {
   scroll-behavior: smooth;
+  /* Keep anchored sections clear of the sticky navbar */
+  scroll-padding-top: 6rem;
 }
 
 body {
   font-family: var(--font-inter);
   color: #1a1a1a;
-  background-color: #ffffff;
+  /* Warm off-white base with two barely-there gold glows, so the page reads
+     as "cream & light" rather than clinical pure white. */
+  background-color: #faf8f5;
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(184, 151, 90, 0.06), transparent 42%),
+    radial-gradient(circle at 88% 82%, rgba(184, 151, 90, 0.05), transparent 45%);
+  background-attachment: fixed;
 }
 
-/* Swiper pre-init guard: keep slides in a single horizontal row (only the
-   first visible) before Swiper's own CSS/JS finishes initializing, so they
-   never flash stacked one below the other on reload. */
+/* Gold text selection for a premium feel */
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* Slim, warm custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f2ede6;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbb489;
+  border-radius: 999px;
+  border: 2px solid #f2ede6;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* ============================================================
+   Keyframes
+   ============================================================ */
+@keyframes ken-burns {
+  from { transform: scale(1); }
+  to { transform: scale(1.07); }
+}
+@keyframes shimmer {
+  to { background-position: 200% center; }
+}
+
+/* ============================================================
+   Scroll-reveal system
+   Elements start hidden/offset and animate in when [data-visible="true"]
+   is set (by the <Reveal> component's IntersectionObserver).
+   ============================================================ */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(34px);
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.8s ease;
+  will-change: opacity, transform;
+}
+[data-reveal='down'] { transform: translateY(-34px); }
+[data-reveal='left'] { transform: translateX(-46px); }
+[data-reveal='right'] { transform: translateX(46px); }
+[data-reveal='scale'] { transform: scale(0.9); }
+[data-reveal='fade'] { transform: none; }
+[data-reveal='blur'] { transform: none; filter: blur(14px); }
+[data-reveal][data-visible='true'] {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* Legacy class kept for the original Categories markup */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-up.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  [data-reveal],
+  .reveal-up {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* ============================================================
+   Reusable decorative / interaction helpers
+   ============================================================ */
+
+/* Animated gold underline that sweeps in on hover (nav & inline links) */
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 1.5px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.link-underline:hover::after {
+  transform: scaleX(1);
+}
+
+/* Gold "fill from left" button */
+.btn-gold {
+  position: relative;
+  z-index: 0;
+  display: inline-block;
+  padding: 0.95rem 2.6rem;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: color 0.45s ease;
+}
+.btn-gold::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.btn-gold:hover {
+  color: #1a1a1a;
+}
+.btn-gold:hover::before {
+  transform: scaleX(1);
+}
+
+/* Shimmering gold gradient text */
+.text-gold-shimmer {
+  background: linear-gradient(
+    90deg,
+    #a07f42 0%,
+    #e6cf9e 25%,
+    #b8975a 50%,
+    #e6cf9e 75%,
+    #a07f42 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: shimmer 5s linear infinite;
+}
+
+/* Skeleton shimmer used by loading placeholders */
+.skeleton-shimmer {
+  background: linear-gradient(100deg, #efe9e1 30%, #f7f3ec 50%, #efe9e1 70%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s linear infinite;
+}
+
+/* ============================================================
+   Swiper
+   ============================================================ */
 .swiper {
   overflow: hidden;
 }
@@ -39,24 +213,39 @@ body {
   width: 100%;
 }
 
-/* Swiper custom styles */
 .swiper-pagination-bullet {
-  background: #b8975a !important;
+  background: #ffffff !important;
+  opacity: 0.6 !important;
+  width: 9px !important;
+  height: 9px !important;
+  transition: all 0.3s ease;
+}
+.swiper-pagination-bullet-active {
+  background: var(--accent) !important;
+  opacity: 1 !important;
+  width: 26px !important;
+  border-radius: 5px !important;
+}
+
+/* Subtle slow zoom on the active hero slide */
+.hero-swiper .swiper-slide-active img {
+  animation: ken-burns 7s ease-out both;
 }
 
 /* Circular dark nav buttons with thin white arrows */
 .swiper-button-next,
 .swiper-button-prev {
-  width: 44px !important;
-  height: 44px !important;
+  width: 46px !important;
+  height: 46px !important;
   border-radius: 50%;
-  background-color: #1a1a1a;
+  background-color: rgba(26, 26, 26, 0.55);
+  backdrop-filter: blur(4px);
   background-repeat: no-repeat;
   background-position: center;
   background-size: 20px 20px;
-  opacity: 0.85;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  opacity: 0.9;
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.3);
+  transition: opacity 0.25s ease, transform 0.25s ease, background-color 0.25s ease;
 }
 
 .swiper-button-prev {
@@ -70,25 +259,11 @@ body {
 .swiper-button-next:hover,
 .swiper-button-prev:hover {
   opacity: 1;
-  transform: scale(1.06);
+  background-color: var(--accent);
+  transform: scale(1.08);
 }
 
-/* Hide Swiper's injected default navigation icon. Swiper 11+ injects a real
-   <svg class="swiper-navigation-icon"> (blue, fill: currentColor) into the
-   button — not an ::after glyph — so we hide it and use our own arrow. */
 .swiper-button-next svg,
 .swiper-button-prev svg {
   display: none;
-}
-
-/* Category card scroll-reveal animation */
-.reveal-up {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.reveal-up.is-visible {
-  opacity: 1;
-  transform: translateY(0);
 }

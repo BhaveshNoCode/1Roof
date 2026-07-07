@@ -3,6 +3,8 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import GalleryLightbox from '@/components/GalleryLightbox'
+import Reveal from '@/components/Reveal'
 import cloudinary from '@/lib/cloudinary'
 import { categories, categoryFolders } from '@/data'
 
@@ -63,27 +65,7 @@ async function Gallery({ slug, name, thumbnailUrl }) {
     return <p className="text-center text-primary/70">Images coming soon.</p>
   }
 
-  return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 md:gap-6">
-      {images.map((src, i) => (
-        <div
-          key={src}
-          className="group relative aspect-square overflow-hidden rounded-lg bg-gray-50 border border-gray-100 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
-        >
-          <img
-            src={src}
-            alt={`${name} ${i + 1}`}
-            // Eager-load the first visible row so it arrives with the page;
-            // lazy-load the rest as the user scrolls.
-            loading={i < 8 ? 'eager' : 'lazy'}
-            fetchPriority={i < 8 ? 'high' : 'auto'}
-            decoding="async"
-            className="absolute inset-0 w-full h-full object-contain p-2 transition-transform duration-500 group-hover:scale-105"
-          />
-        </div>
-      ))}
-    </div>
-  )
+  return <GalleryLightbox images={images} name={name} />
 }
 
 // Placeholder shown instantly while the gallery streams in.
@@ -91,7 +73,7 @@ function GallerySkeleton() {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 md:gap-6">
       {Array.from({ length: 12 }).map((_, i) => (
-        <div key={i} className="aspect-square rounded-lg bg-gray-100 animate-pulse" />
+        <div key={i} className="aspect-square rounded-lg skeleton-shimmer" />
       ))}
     </div>
   )
@@ -106,16 +88,33 @@ export default function CollectionPage({ params }) {
       <Navbar />
       <section className="max-w-[1400px] mx-auto px-6 md:px-10 py-16">
         <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-accent transition-colors mb-8"
+          href="/#shop-by-category"
+          className="group inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-accent transition-colors mb-10"
         >
-          <span aria-hidden className="text-lg leading-none">&larr;</span>
+          <span aria-hidden className="text-lg leading-none transition-transform duration-300 group-hover:-translate-x-1">&larr;</span>
           Back to Home
         </Link>
 
-        <h1 className="font-display italic text-accent text-4xl md:text-5xl lg:text-6xl leading-tight mb-12 text-center">
-          {category.name}
-        </h1>
+        {/* Animated header */}
+        <div className="text-center mb-14">
+          <Reveal variant="fade">
+            <p className="text-xs md:text-sm text-accent tracking-[0.35em] uppercase mb-4">
+              1 Roof Collection
+            </p>
+          </Reveal>
+          <Reveal delay={100}>
+            <h1 className="font-display italic text-primary text-4xl md:text-5xl lg:text-6xl leading-tight mb-6">
+              {category.name}
+            </h1>
+          </Reveal>
+          <Reveal variant="fade" delay={200}>
+            <div className="flex items-center justify-center gap-3">
+              <span className="h-px w-12 md:w-16 bg-gradient-to-r from-transparent to-accent" />
+              <span className="w-1.5 h-1.5 rotate-45 bg-accent" />
+              <span className="h-px w-12 md:w-16 bg-gradient-to-l from-transparent to-accent" />
+            </div>
+          </Reveal>
+        </div>
 
         <Suspense fallback={<GallerySkeleton />}>
           <Gallery
