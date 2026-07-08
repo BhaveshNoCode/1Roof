@@ -20,6 +20,7 @@ module.exports = {
         sans: ['var(--font-inter)', 'sans-serif'],
         serif: ['var(--font-inter)', 'sans-serif'],
         display: ['var(--font-playfair)', 'serif'],
+        elegant: ['var(--font-elegant)', 'serif'],
       },
       boxShadow: {
         soft: '0 10px 40px -12px rgba(26, 26, 26, 0.12)',

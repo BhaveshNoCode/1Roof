@@ -16,10 +16,10 @@ const items = [
     ),
   },
   {
-    title: 'Pan-India Delivery',
-    text: 'Safe, insured shipping',
+    title: '200+ Designs',
+    text: 'Signature curated pieces',
     icon: (
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.4} d="M3 7h11v8H3V7zm11 3h4l3 3v2h-7v-5zM7 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm10 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.4} d="M12 3l2.09 4.9L19.5 8.4l-3.75 3.4 1.02 5.3L12 14.9 7.23 17.1l1.02-5.3L4.5 8.4l5.41-.5L12 3z" />
     ),
   },
   {
@@ -33,21 +33,27 @@ const items = [
 
 export default function Features() {
   return (
-    <section className="relative bg-white/70 border-y border-accent/10 py-12 md:py-14 px-6">
-      <div className="max-w-6xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
+    <section className="relative bg-white py-14 md:py-16 px-6">
+      {/* Gold hairline framing */}
+      <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
+      <span className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
+
+      <div className="max-w-6xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-12">
         {items.map((it, i) => (
           <Reveal
             key={it.title}
             delay={i * 90}
-            className="flex flex-col items-center text-center gap-3 group"
+            className={`relative flex flex-col items-center text-center gap-3 group ${
+              i !== 0 ? 'lg:before:absolute lg:before:left-0 lg:before:top-1/2 lg:before:-translate-y-1/2 lg:before:h-16 lg:before:w-px lg:before:bg-gradient-to-b lg:before:from-transparent lg:before:via-accent/25 lg:before:to-transparent' : ''
+            }`}
           >
-            <div className="w-14 h-14 flex items-center justify-center rounded-full border border-accent/40 text-accent transition-all duration-500 group-hover:bg-accent group-hover:text-white group-hover:scale-110 group-hover:shadow-gold">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="w-16 h-16 flex items-center justify-center rounded-full border border-accent/40 text-accent bg-gradient-to-b from-accent/5 to-transparent transition-all duration-500 group-hover:bg-accent group-hover:text-white group-hover:scale-110 group-hover:shadow-gold group-hover:border-accent">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 {it.icon}
               </svg>
             </div>
-            <h3 className="font-medium text-primary tracking-wide">{it.title}</h3>
-            <p className="text-sm text-muted">{it.text}</p>
+            <h3 className="font-display text-xl md:text-2xl text-primary tracking-wide">{it.title}</h3>
+            <p className="text-xs md:text-sm text-muted tracking-[0.12em] uppercase">{it.text}</p>
           </Reveal>
         ))}
       </div>
