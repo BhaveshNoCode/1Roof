@@ -1,18 +1,35 @@
 const CLOUDINARY_BASE = 'https://res.cloudinary.com/jqtn8ju7/image/upload/f_auto,q_auto'
 const CLOUDINARY_THUMB = 'https://res.cloudinary.com/jqtn8ju7/image/upload/f_auto,q_auto,c_limit,w_800,h_800'
 
-// Re-crops a full-size hero banner URL for a given transformation, so mobile
-// and tablet can get a taller, smart-cropped version instead of the same
-// wide banner squished down to a thin strip.
+// ── Brand assets & contact ─────────────────────────────────────────────
+// New black & gold "1 ROOF" logo. Delivered as a PNG with the white JPG
+// background knocked out (e_make_transparent) so it sits cleanly on the
+// champagne navbar. The full lockup is used in the navbar; the roof emblem
+// alone is the favicon (see app/icon.png).
+export const LOGO_URL =
+  'https://res.cloudinary.com/jqtn8ju7/image/upload/e_make_transparent:12/f_png,q_auto/v1783484052/Company_Logo_hlibqn.jpg'
+
+export const WHATSAPP_NUMBER = '919052583002'
+export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}`
+export const INSTAGRAM_URL =
+  'https://www.instagram.com/aamir_1roof?utm_source=qr&igsh=MWR2cWl4em1meXcxaA%3D%3D'
+export const FACEBOOK_URL =
+  'https://www.facebook.com/people/Mohd-Aamir/pfbid0HxoGQCvfpsqkvETDAp9WLQqEJn8rjzniCUGLNihguUzfTEisTrjnXN5RfqCDrz7ml/?rdid=CgJscbUfGWPFXkVJ&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1BNwq3KpwQ%2F'
+
+// Re-crops a full-size hero image for a given Cloudinary transformation, so
+// each breakpoint gets a smart-cropped variant sized for its container
+// instead of the same photo squished to fit.
 export function heroVariant(url, transform) {
-  return url.replace('/upload/f_auto,q_auto/', `/upload/${transform}/`)
+  return url.replace('/upload/', `/upload/${transform}/`)
 }
 
+// New hero photography (uploaded to the Cloudinary "hero" folder). Stored as
+// raw versioned URLs; HeroSlider inserts a smart-crop transform per breakpoint.
 export const heroSlides = [
-  { image: `${CLOUDINARY_BASE}/v1783123815/Slide1_oumpnb.webp`, link: '/' },
-  { image: `${CLOUDINARY_BASE}/v1783123816/Slide2_w7azrt.webp`, link: '/' },
-  { image: `${CLOUDINARY_BASE}/v1783123818/Slide3_kfwbzl.webp`, link: '/' },
-  { image: `${CLOUDINARY_BASE}/v1783123820/Slide4_n7qvno.webp`, link: '/' },
+  { image: 'https://res.cloudinary.com/jqtn8ju7/image/upload/v1783480188/image5_auo3ax.jpg', link: '/#shop-by-category' },
+  { image: 'https://res.cloudinary.com/jqtn8ju7/image/upload/v1783480048/image8_mz1y76.jpg', link: '/#shop-by-category' },
+  { image: 'https://res.cloudinary.com/jqtn8ju7/image/upload/v1783479852/image6_t1kwv6.jpg', link: '/#shop-by-category' },
+  { image: 'https://res.cloudinary.com/jqtn8ju7/image/upload/v1783480294/image7_frtldw.jpg', link: '/#shop-by-category' },
 ]
 
 export const categories = [
@@ -29,7 +46,7 @@ export const categories = [
   { name: 'Sofa', slug: 'sofa', image: `${CLOUDINARY_THUMB}/v1783136421/image2_svukp5.jpg` },
   { name: 'Sofa Cum Bed', slug: 'sofa-cum-bed', image: '/images/categories/sofa-cum-bed.webp' },
   { name: 'Side-Side Table', slug: 'side-side-table', image: '/images/categories/side-side-table.webp' },
-  { name: 'Wooden Beds', slug: 'wooden-beds', image: '/images/categories/wooden-beds.webp' },
+  { name: 'Wooden Beds', slug: 'wooden-beds', image: `${CLOUDINARY_THUMB}/v1783478940/image6_p2pcdx.jpg` },
   { name: 'Wooden Sofa', slug: 'wooden-sofa', image: '/images/categories/wooden-sofa.webp' },
 ]
 
@@ -43,4 +60,5 @@ export const categoryFolders = {
   'dining-tables': 'categories/dining tables',
   'lounger-sofa': 'categories/lounger sofa',
   sofa: 'categories/sofa',
+  'wooden-beds': 'categories/wooden beds',
 }

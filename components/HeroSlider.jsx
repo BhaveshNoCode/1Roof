@@ -10,6 +10,14 @@ import { heroSlides, heroVariant } from '@/data'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
+import 'swiper/css/effect-fade'
+
+// Smart-cropped variants per breakpoint. The source photos are mixed aspect
+// ratios, so g_auto keeps the furniture centred while c_fill gives every
+// slide an identical frame — no height jump between slides.
+const DESKTOP = 'f_auto,q_auto,c_fill,g_auto,ar_16:9,w_1920,e_sharpen:60'
+const TABLET = 'f_auto,q_auto,c_fill,g_auto,ar_3:2,w_1300'
+const MOBILE = 'f_auto,q_auto,c_fill,g_auto,ar_4:5,w_820'
 
 export default function HeroSlider() {
   const swiperRef = useRef(null)
@@ -17,15 +25,16 @@ export default function HeroSlider() {
   useEffect(() => {
     const initSwiper = async () => {
       const { Swiper } = await import('swiper')
-      const { Navigation, Pagination, Autoplay } = await import('swiper/modules')
+      const { Navigation, Pagination, Autoplay, EffectFade } = await import('swiper/modules')
 
       if (swiperRef.current && !swiperRef.current.swiper) {
         new Swiper(swiperRef.current, {
-          modules: [Navigation, Pagination, Autoplay],
+          modules: [Navigation, Pagination, Autoplay, EffectFade],
           loop: true,
-          autoHeight: true,
-          speed: 900,
-          autoplay: { delay: 5000, disableOnInteraction: false },
+          speed: 1100,
+          effect: 'fade',
+          fadeEffect: { crossFade: true },
+          autoplay: { delay: 5500, disableOnInteraction: false },
           pagination: { el: '.swiper-pagination', clickable: true },
           navigation: {
             nextEl: '.swiper-button-next',
@@ -38,27 +47,24 @@ export default function HeroSlider() {
   }, [])
 
   return (
-    <section className="relative w-full overflow-hidden animate-fade-in">
+    <section className="relative w-full overflow-hidden animate-fade-in bg-primary">
       <div ref={swiperRef} className="swiper hero-swiper">
         <div className="swiper-wrapper">
           {heroSlides.map((slide, i) => (
-            <div key={i} className="swiper-slide overflow-hidden">
-              <Link href={slide.link}>
+            <div
+              key={i}
+              className="swiper-slide relative overflow-hidden h-[58vh] min-h-[420px] sm:h-[64vh] lg:h-[74vh] lg:max-h-[760px]"
+            >
+              <Link href={slide.link} className="block w-full h-full">
                 <picture>
-                  {/* Mobile: taller, smart-cropped so the banner isn't squished into a thin strip */}
-                  <source
-                    media="(max-width: 640px)"
-                    srcSet={heroVariant(slide.image, 'f_auto,q_auto,c_fill,g_auto,ar_4:5,w_800')}
-                  />
-                  {/* Tablet: a shorter, still smart-cropped variant */}
-                  <source
-                    media="(max-width: 1024px)"
-                    srcSet={heroVariant(slide.image, 'f_auto,q_auto,c_fill,g_auto,ar_16:9,w_1200')}
-                  />
+                  <source media="(max-width: 640px)" srcSet={heroVariant(slide.image, MOBILE)} />
+                  <source media="(max-width: 1024px)" srcSet={heroVariant(slide.image, TABLET)} />
                   <img
-                    src={slide.image}
-                    alt={`Slide ${i + 1}`}
-                    className="block w-full h-full object-cover aspect-[4/5] sm:aspect-video lg:aspect-auto lg:h-auto lg:object-contain"
+                    src={heroVariant(slide.image, DESKTOP)}
+                    alt={`1 Roof premium furniture ${i + 1}`}
+                    loading={i === 0 ? 'eager' : 'lazy'}
+                    fetchPriority={i === 0 ? 'high' : 'auto'}
+                    className="block w-full h-full object-cover"
                   />
                 </picture>
               </Link>
@@ -71,20 +77,8 @@ export default function HeroSlider() {
       </div>
 
       {/* Soft gradient vignette top & bottom for depth and to seat the controls */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/15 to-transparent z-10" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/25 to-transparent z-10" />
-
-      {/* Animated scroll cue */}
-      <a
-        href="#shop-by-category"
-        aria-label="Scroll to categories"
-        className="absolute bottom-5 left-1/2 -translate-x-1/2 z-20 hidden sm:flex flex-col items-center gap-1 text-white/80 hover:text-white transition-colors"
-      >
-        <span className="text-[10px] tracking-[0.3em] uppercase">Scroll</span>
-        <span className="flex h-9 w-6 items-start justify-center rounded-full border border-white/60 p-1">
-          <span className="h-2 w-1 rounded-full bg-accent animate-bounce" />
-        </span>
-      </a>
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/20 to-transparent z-10" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/30 to-transparent z-10" />
     </section>
   )
 }

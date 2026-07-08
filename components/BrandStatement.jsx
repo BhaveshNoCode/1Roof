@@ -37,9 +37,10 @@ export default function BrandStatement() {
         </Reveal>
 
         <Reveal delay={300}>
-          <p className="text-gray-300 leading-relaxed max-w-xl mx-auto mb-10">
-            Over 15 years of craftsmanship, premium materials and an eye for
-            detail — every 1 Roof piece is made to elevate the way you live.
+          <p className="font-elegant text-gray-200/95 text-2xl md:text-[1.75rem] leading-relaxed tracking-wide max-w-2xl mx-auto mb-10">
+            Over <span className="text-accent-light">15 years</span> of craftsmanship,
+            premium materials and an eye for detail — every 1 Roof piece is made to
+            <span className="italic"> elevate the way you live.</span>
           </p>
         </Reveal>
 

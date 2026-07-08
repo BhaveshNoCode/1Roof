@@ -1,5 +1,6 @@
 import './globals.css'
 import ScrollProgress from '@/components/ScrollProgress'
+import ContactWidget from '@/components/ContactWidget'
 
 export const metadata = {
   title: '1Roof | Premium & Luxury Furniture Store | Hyderabad',
@@ -30,6 +31,7 @@ export default function RootLayout({ children }) {
       <body>
         <ScrollProgress />
         {children}
+        <ContactWidget />
       </body>
     </html>
   )
