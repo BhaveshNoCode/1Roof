@@ -11,6 +11,12 @@ export const LOGO_URL =
 
 export const WHATSAPP_NUMBER = '919052583002'
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}`
+
+// Public contact numbers, surfaced in the footer's "Let's Talk" column.
+export const PHONE_NUMBERS = [
+  { label: 'Customer Support', number: '+91 9052583002' },
+  { label: 'Services', number: '+91 7995962525' },
+]
 export const INSTAGRAM_URL =
   'https://www.instagram.com/aamir_1roof?utm_source=qr&igsh=MWR2cWl4em1meXcxaA%3D%3D'
 export const FACEBOOK_URL =
@@ -42,10 +48,10 @@ export const categories = [
   { name: 'Dining Tables', slug: 'dining-tables', image: `${CLOUDINARY_THUMB}/v1783391766/image9_rchia4.jpg` },
   { name: 'Dining Chairs', slug: 'dining-chairs', image: `${CLOUDINARY_THUMB}/v1783136283/image3_oc1glw.png` },
   { name: 'Lounger Sofa', slug: 'lounger-sofa', image: `${CLOUDINARY_THUMB}/v1783136358/image1_d9smjx.jpg` },
-  { name: 'Recliners', slug: 'recliners', image: '/images/categories/recliners.webp' },
+  { name: 'Recliners', slug: 'recliners', image: `${CLOUDINARY_THUMB}/v1784263564/image1_vyhtwq.jpg` },
   { name: 'Sofa', slug: 'sofa', image: `${CLOUDINARY_THUMB}/v1783136421/image2_svukp5.jpg` },
   { name: 'Sofa Cum Bed', slug: 'sofa-cum-bed', image: '/images/categories/sofa-cum-bed.webp' },
-  { name: 'Side-Side Table', slug: 'side-side-table', image: '/images/categories/side-side-table.webp' },
+  { name: 'Sofa-Slide Table', slug: 'sofa-slide-table', image: '/images/categories/sofa-slide-table.webp' },
   { name: 'Wooden Beds', slug: 'wooden-beds', image: `${CLOUDINARY_THUMB}/v1783478940/image6_p2pcdx.jpg` },
   { name: 'Wooden Sofa', slug: 'wooden-sofa', image: '/images/categories/wooden-sofa.webp' },
 ]
@@ -59,6 +65,7 @@ export const categoryFolders = {
   'dining-chairs': 'categories/dining chairs',
   'dining-tables': 'categories/dining tables',
   'lounger-sofa': 'categories/lounger sofa',
+  recliners: 'categories/recliners',
   sofa: 'categories/sofa',
   'wooden-beds': 'categories/wooden beds',
 }
