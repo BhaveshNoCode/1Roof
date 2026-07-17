@@ -96,7 +96,7 @@ export default function Categories() {
                 View
               </span>
             </div>
-            <p className="mt-3.5 text-center text-sm md:text-base font-medium text-primary group-hover:text-accent transition-colors">
+            <p className="mt-3.5 text-center font-elegant text-lg md:text-xl font-medium tracking-wide text-primary group-hover:text-accent transition-colors">
               {cat.name}
             </p>
           </Link>
